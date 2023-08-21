@@ -1,0 +1,123 @@
+<div
+  [ngClass]="{ '!left-0': isMenuOpen() }"
+  class="font-['REM'] bg-gray1-100 w-[300px] h-screen absolute left-[-246px] transition-all duration-500 pl-5 pr-2"
+>
+  <div class="flex justify-between items-end py-4">
+    <h1 class="text-3xl font-bold leading-7 text-gray1-400">Menu</h1>
+    <button
+      [ngClass]="{ disabled: isMenuOpen() }"
+      (click)="toggleMenu()"
+      class="group flex flex-col gap-1 items-center p-2 rounded-md"
+    >
+      <div
+        class="w-5 bg-gray1-300 h-[2px] text-gray group-[.disabled]:rotate-45 group-[.disabled]:-translate-y-[1px] transition-all origin-left duration-100"
+      ></div>
+      <div
+        class="w-5 bg-gray1-300 h-[2px] text-gray group-[.disabled]:bg-gray1-100"
+      ></div>
+      <div
+        class="w-5 bg-gray1-300 h-[2px] text-gray group-[.disabled]:-rotate-45 group-[.disabled]:translate-y-[1px] transition-all origin-left duration-100"
+      ></div>
+    </button>
+  </div>
+
+  <div
+    [ngClass]="{ 'border-gray1-100': !isMenuOpen() }"
+    class="relative border rounded-md transition-all duration-500 mr-[10px]"
+  >
+    <input
+      [ngClass]="{ hidden: !isMenuOpen() }"
+      placeholder="Search"
+      type="search"
+      class="w-full bg-gray1-100 p-2 pl-10 rounded-md outline-none appearance-none"
+    />
+    <div [ngClass]="{ hidden: isMenuOpen() }" class="h-10 w-full"></div>
+    <img
+      [ngClass]="{ '!-right-2': !isMenuOpen() }"
+      src="../../../assets/icons/search.svg"
+      class="transition-all duration-500 absolute w-6 top-2 right-56 text-white focus:border-none fill-white"
+    />
+  </div>
+
+  <!-- Tasks -->
+
+  <ng-container
+    *ngTemplateOutlet="
+      listTemplate;
+      context: {
+        title: 'TASKS',
+        items: [
+          {
+            name: 'Upcoming',
+            icon: 'upcoming.svg',
+            counter : true
+          },
+          {
+            name: 'Today',
+            icon: 'daily.svg',
+            counter : true
+          },
+          {
+            name: 'Calender',
+            icon: 'calender.svg',
+          },
+          {
+            name: 'Sticky Wall',
+            icon: 'note.svg',
+          },
+        ],
+        addItem: false
+      }
+    "
+  ></ng-container>
+
+  <!-- Tasks End -->
+
+  <!-- Lists -->
+
+  <ng-container>
+    <ng-container
+      *ngTemplateOutlet="
+        listTemplate;
+        context: {
+          title: 'LISTS',
+          items: listService.lists,
+          addItem: true
+        }
+      "
+    >
+    </ng-container>
+  </ng-container>
+
+  <!-- Lists End -->
+
+  <!-- Tags  -->
+  <tags></tags>
+  <!-- Tags End -->
+</div>
+
+<ng-template
+  #listTemplate
+  let-items="items"
+  let-title="title"
+  let-icon="icon"
+  let-addItem="addItem"
+>
+  <h1 class="font-medium text-sm text-gray1-400 pl-2 mt-8">{{ title }}</h1>
+  <ng-container *ngFor="let item of items">
+    <list-components
+      [name]="item.name"
+      [icon]="item.icon"
+      [color]="item.color"
+      [counter]="item.counter"
+      [isMenuOpen]="isMenuOpen()"
+    ></list-components>
+  </ng-container>
+  <button
+    *ngIf="addItem"
+    class="py-4 px-3 flex hover:bg-white rounded-md w-full transition-all duration-100"
+  >
+    <img src="../../../assets/icons/plus.svg" class="w-6" />
+    <span class="ml-2">Add New List</span>
+  </button>
+</ng-template>
