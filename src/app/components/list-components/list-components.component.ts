@@ -14,6 +14,7 @@ export class ListComponentsComponent implements OnInit {
   @Input() public icon?: String;
   @Input() public color: ListColors | '' = '';
   @Input() public counter: Boolean = false;
+  @Input() public counterValue: Number = 0;
   @Input() public selected: Boolean = false;
   @Input() public isMenuOpen: Boolean = false;
 

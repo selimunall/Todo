@@ -1,6 +1,8 @@
 <h1 class="font-medium text-sm text-gray1-400 pl-2 mt-8">TAGS</h1>
 <div class="w-full flex flex-wrap">
-  <!-- <ng-containter *ngTemplateOutlet="tagsTemplate"></ng-containter> -->
+  <ng-container
+    *ngTemplateOutlet="tagsTemplate; context: { name: 'selim' }"
+  ></ng-container>
 </div>
 
 <ng-template #tagsTemplate> asdasd </ng-template>

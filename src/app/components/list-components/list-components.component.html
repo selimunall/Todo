@@ -6,19 +6,24 @@
   <div [ngClass]="{ '!px-0': !isMenuOpen }" class="flex items-center py-3 px-1">
     <a
       href=""
-      [ngClass]="{ 'hover:bg-white bg-lis': !isMenuOpen }"
+      [ngClass]="{ 'hover:bg-white ': !isMenuOpen }"
       class="px-2 py-1 rounded-md"
     >
       <div [ngClass]="[!icon ? color : '']" class="rounded">
-        <img
-          *ngIf="icon"
+        <div
           [ngClass]="{
-            '!right-1 z-10 hover:bg-gray1-400/25 duration-100 rounded-md':
-              !isMenuOpen
+            '!right-1 z-10  hover:bg-gray1-400/25 duration-100 rounded-md':
+              !isMenuOpen,
+            'bg-gray1-100': icon
           }"
-          src="../../assets/icons/{{ icon }}"
-          class="fill-white text-white w-6 absolute transition-all duration-500 right-[236px]"
-        />
+          class="w-6 h-6 fill-white text-white absolute transition-all duration-500 right-[236px]"
+        >
+          <img
+            *ngIf="icon"
+            src="../../assets/icons/{{ icon }}"
+            class="w-6 z-20"
+          />
+        </div>
         <div class="w-6 h-6"></div>
       </div>
     </a>
@@ -29,11 +34,11 @@
     [ngClass]="{
       'rounded-3xl scale-75 px-[2px] !mr-0 !-mt-5 !-ml-2 z-20':
         !isMenuOpen && icon,
-      '-mr-[2px]': !icon && !isMenuOpen
+      '!-mr-[1px]': !isMenuOpen && !icon
     }"
     *ngIf="counter"
     class="text-gray1-400 bg-gray1-200 transition-all duration-500 mr-2 -mt-0 -ml-3 px-3 py-[1px] text-base rounded-md"
   >
-    0
+    {{ counterValue }}
   </a>
 </a>
