@@ -1,8 +1,28 @@
-<h1 class="font-medium text-sm text-gray1-400 pl-2 mt-8">TAGS</h1>
-<div class="w-full flex flex-wrap">
-  <ng-container
-    *ngTemplateOutlet="tagsTemplate; context: { name: 'selim' }"
-  ></ng-container>
-</div>
+<div class="bg-gray1-100 flex w-full flex-col">
+  <h1 class="font-medium text-sm text-gray1-400 pl-2 mt-8">TAGS</h1>
+  <div class="w-full flex flex-wrap">
+    <ng-container
+      *ngTemplateOutlet="tagsTemplate; context: { tags: todoService.tags }"
+    ></ng-container>
+  </div>
 
-<ng-template #tagsTemplate> asdasd </ng-template>
+  <ng-template #tagsTemplate let-tags="tags">
+    <div class="flex gap-2 flex-wrap">
+      <ng-container *ngFor="let item of tags">
+        <button class="{{ item.color }}/50" class="px-2 py-1 rounded">
+          {{ item.tagName }}
+        </button>
+      </ng-container>
+      <button (click)="openForm()" class="bg-slate-300 px-2 py-1 rounded flex">
+        <img class="w-6" src="../../../assets/icons/plus.svg" />
+        <span class="ml-1">Add Tag</span>
+      </button>
+      <div
+        [ngClass]="addTagButton() ? 'hidden' : 'block'"
+        class="ease-out transition-all duration-300 absolute translate-x-full -ml-6"
+      >
+        <tags-list-form [fromTag]="true"></tags-list-form>
+      </div>
+    </div>
+  </ng-template>
+</div>

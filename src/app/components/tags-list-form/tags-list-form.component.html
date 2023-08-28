@@ -1,0 +1,74 @@
+<form [formGroup]="listForm" (submit)="createList()">
+  <div [ngClass]="'bg-gray1-100'">
+    <div
+      class="w-full flex border border-black/30 rounded-md z-0 flex-col mt-1"
+    >
+      <div class="flex w-full p-3 items-center gap-2">
+        <div
+          class="w-6 h-6 min-h-6 min-w-[24px] rounded"
+          [ngClass]="fromTag ? selectedColors() + '/50' : selectedColors()"
+        ></div>
+        <input
+          type="text"
+          [placeholder]="fromTag ? 'Tag Name' : 'List Name'"
+          class="h-8 rounded w-40 bg-white/70 border outline-none appearance-none pl-2"
+          formControlName="formName"
+          required
+        />
+        <button
+          [disabled]="listForm.invalid"
+          type="submit"
+          class="rounded px-2 py-1 bg-slate-300 hover:bg-slate-300/50 disabled:bg-slate-300/50 transition-all disabled:text-black/70"
+        >
+          Add
+        </button>
+      </div>
+      <div class="flex w-full p-3 justify-between">
+        <ng-container
+          *ngTemplateOutlet="
+            button;
+            context: {
+              list: {
+                colors: [
+                  listColors.RED,
+                  listColors.BLUE,
+                  listColors.GREEN,
+                  listColors.TURQUOISE,
+                  listColors.YELLOW,
+                  listColors.PINK,
+                  listColors.ORANGE,
+                  listColors.PURPLE
+                ]
+              },
+              forTag: fromTag
+            }
+          "
+        ></ng-container>
+      </div>
+    </div>
+  </div>
+</form>
+
+<ng-template #button let-list="list" let-forTag="forTag">
+  <ng-container *ngFor="let item of list.colors">
+    <button
+      type="button"
+      class="w-5 h-5 rounded-sm"
+      (click)="changeColor(item)"
+      [ngClass]="forTag ? item + '/50' : item"
+    ></button>
+  </ng-container>
+  <span
+    class="hidden"
+    [ngClass]="[
+      'bg-list-red/50',
+      'bg-list-pink/50',
+      'bg-list-purple/50',
+      'bg-list-blue/50',
+      'bg-list-turquoise/50',
+      'bg-list-green/50',
+      'bg-list-yellow/50',
+      'bg-list-orange/50'
+    ]"
+  ></span>
+</ng-template>

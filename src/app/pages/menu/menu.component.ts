@@ -10,6 +10,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { TagsListFormComponent } from 'src/app/components/tags-list-form/tags-list-form.component';
 @Component({
   standalone: true,
   selector: 'app-menu',
@@ -23,6 +24,7 @@ import {
     ListComponentsComponent,
     FormsModule,
     ReactiveFormsModule,
+    TagsListFormComponent,
   ],
 })
 export class MenuComponent {

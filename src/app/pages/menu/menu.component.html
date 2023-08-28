@@ -21,6 +21,7 @@
     </button>
   </div>
 
+  <!-- Search  -->
   <div
     [ngClass]="{ 'border-gray1-100': !isMenuOpen() }"
     class="relative border rounded-md transition-all duration-500 mr-[10px]"
@@ -38,6 +39,7 @@
       class="transition-all duration-500 absolute w-6 top-2 right-56 text-white focus:border-none fill-white"
     />
   </div>
+  <!-- Search End  -->
 
   <!-- Tasks -->
 
@@ -99,86 +101,36 @@
     <span class="ml-2">Add New List</span>
   </button>
 
-  <form [formGroup]="listForm" (submit)="createList()">
-    <div class="w-full flex border rounded-md flex-col">
-      <div class="flex w-full p-3 items-center gap-2">
-        <div
-          class="w-6 h-6 min-h-6 min-w-[24px] rounded"
-          [class]="selectedColors()"
-        ></div>
-        <input
-          type="text"
-          placeholder="List Name"
-          class="h-8 rounded w-40 bg-gray1-100 border outline-none appearance-none pl-2"
-          formControlName="formName"
-          required
-        />
-        <button
-          [disabled]="listForm.invalid"
-          type="submit"
-          class="rounded px-2 py-1 bg-slate-300 hover:bg-slate-300/50 disabled:bg-slate-300/50 transition-all"
-        >
-          Add
-        </button>
-      </div>
-      <div class="flex w-full p-3 justify-between">
-        <button
-          type="button"
-          class="w-5 h-5 rounded-sm"
-          (click)="changeColor(listColors.RED)"
-          [class]="listColors.RED"
-        ></button>
-        <button
-          type="button"
-          class="w-5 h-5 rounded-sm"
-          (click)="changeColor(listColors.PURPLE)"
-          [class]="listColors.PURPLE"
-        ></button>
-        <button
-          type="button"
-          class="w-5 h-5 rounded-sm"
-          (click)="changeColor(listColors.ORANGE)"
-          [class]="listColors.ORANGE"
-        ></button>
-        <button
-          type="button"
-          class="w-5 h-5 rounded-sm"
-          (click)="changeColor(listColors.PINK)"
-          [class]="listColors.PINK"
-        ></button>
-        <button
-          type="button"
-          class="w-5 h-5 rounded-sm"
-          (click)="changeColor(listColors.BLUE)"
-          [class]="listColors.BLUE"
-        ></button>
-        <button
-          type="button"
-          class="w-5 h-5 rounded-sm"
-          (click)="changeColor(listColors.YELLOW)"
-          [class]="listColors.YELLOW"
-        ></button>
-        <button
-          type="button"
-          class="w-5 h-5 rounded-sm"
-          (click)="changeColor(listColors.TURQUOISE)"
-          [class]="listColors.TURQUOISE"
-        ></button>
-        <button
-          type="button"
-          class="w-5 h-5 rounded-sm"
-          (click)="changeColor(listColors.GREEN)"
-          [class]="listColors.GREEN"
-        ></button>
-      </div>
-    </div>
-  </form>
+  <tags-list-form [fromTag]="false"></tags-list-form>
 
   <!-- Lists End -->
 
-  <!-- Tags  -->
-  <tags></tags>
-  <!-- Tags End -->
+  <div
+    [ngClass]="{ '!-mt-0': isDropDownOpen() }"
+    class="transition-all bg-gray1-100 absolute -mt-[106px] w-full -ml-5 pl-4 z-10 pr-12 duration-200"
+  >
+    <!-- Tags  -->
+    <tags></tags>
+    <!-- Tags End -->
+
+    <!-- Settings -->
+    <div class="mt-20">
+      <ng-container
+        *ngTemplateOutlet="
+          settings;
+          context: {
+            items: [
+              { name: 'Settings', icon: 'settings.svg', login: true },
+              { name: 'Sing Out', icon: 'logout.svg', login: true },
+              { name: 'Login In', icon: 'login.svg', login: false }
+            ]
+          }
+        "
+      >
+      </ng-container>
+    </div>
+    <!-- Setting End -->
+  </div>
 </div>
 
 <ng-template
@@ -198,5 +150,18 @@
       [counterValue]="item.counterValue"
       [isMenuOpen]="isMenuOpen()"
     ></list-components>
+  </ng-container>
+</ng-template>
+
+<ng-template #settings let-items="items">
+  <ng-container *ngFor="let item of items">
+    <ng-container *ngIf="item.login">
+      <button
+        class="flex items-center hover:bg-white rounded-md py-4 px-4 transition-all"
+      >
+        <img src="../../../assets/icons/{{ item.icon }}" class="w-6" />
+        <span class="ml-2">{{ item.name }}</span>
+      </button>
+    </ng-container>
   </ng-container>
 </ng-template>

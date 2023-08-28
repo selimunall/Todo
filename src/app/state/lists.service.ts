@@ -21,6 +21,11 @@ export class ListService {
   ];
 
   public addNewList(name: string, color: ListColors): void {
-    this.lists.push({ name: name, color: color });
+    this.lists.push({
+      name: name[0].toUpperCase() + name.slice(1),
+      color: color,
+      counter: true,
+      counterValue: 0,
+    });
   }
 }
