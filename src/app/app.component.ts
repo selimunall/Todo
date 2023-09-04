@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { MenuComponent } from './pages/menu/menu.component';
+import { LayoutComponent } from './layout/layout/layout.component';
 
 @Component({
   standalone: true,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [MenuComponent],
+  imports: [LayoutComponent],
 })
 export class AppComponent {
   title = 'todo-project';

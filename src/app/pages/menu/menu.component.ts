@@ -1,8 +1,8 @@
 import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ListComponentsComponent } from 'src/app/components/list-components/list-components.component';
-import { TagsComponent } from 'src/app/components/tags/tags.component';
-import { ListService } from 'src/app/state/lists.service';
+import { TagsComponent } from 'src/app/components/tag/tags/tags.component'; 
+import { ListService } from 'src/app/services/lists.service';
 import { ListColors } from 'src/app/model/colorType.model';
 import {
   FormControl,
@@ -10,10 +10,14 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { TagsListFormComponent } from 'src/app/components/tags-list-form/tags-list-form.component';
+import { TagsListFormComponent } from 'src/app/components/tag/tags-list-form/tags-list-form.component';
+import { TagState } from 'src/app/components/tag/tag.state';
+import { ConditionState} from 'src/app/state/condition.state';
+import { SettingsComponent } from '../settings/settings.component';
 @Component({
   standalone: true,
   selector: 'app-menu',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './menu.component.html',
   imports: [
     NgClass,
@@ -25,23 +29,21 @@ import { TagsListFormComponent } from 'src/app/components/tags-list-form/tags-li
     FormsModule,
     ReactiveFormsModule,
     TagsListFormComponent,
+    SettingsComponent,
   ],
+  providers: [TagState]
 })
-export class MenuComponent {
-  public isMenuOpen = signal(true);
-  public isDropDownOpen = signal(false);
+export class MenuComponent  {
+  public state = inject(ConditionState);
   public listService = inject(ListService);
   public lists = this.listService.lists;
   public listColors = ListColors;
   public selectedColors = signal<ListColors>(ListColors.RED);
+  public tagState = inject(TagState);
 
   listForm = new FormGroup({
     formName: new FormControl(''),
   });
-
-  public toggleMenu() {
-    this.isMenuOpen.set(!this.isMenuOpen());
-  }
 
   public changeColor(listColor: ListColors) {
     // event.preventDefault();
@@ -56,8 +58,7 @@ export class MenuComponent {
     console.log(this.listForm.value.formName, this.selectedColors());
   }
 
-  public toggleDropDown(event: MouseEvent) {
-    event.preventDefault();
-    this.isDropDownOpen.set(!this.isDropDownOpen());
+  public openListTags() {
+    this.tagState.openListTag(!this.tagState.listTagsMenuOpen());
   }
 }

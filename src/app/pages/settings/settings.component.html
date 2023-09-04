@@ -1,6 +1,21 @@
 <div
-  [ngClass]="{ '!left-0': true }"
-  class="font-['REM'] bg-gray1-100 w-[300px] h-screen absolute left-[-246px] transition-all duration-500 pl-5 pr-2"
+  class="bg-gray1-100 w-full h-screen duration-500 pl-5 pr-2"
 >
-
+  <div class="flex justify-between items-end py-4">
+    <h1 class="text-3xl font-bold leading-7 text-gray1-400">Settings</h1>
+    <button
+      (click)="state.toggleSettingsMenu(!state.isSettingsOpen())"
+      class="group disabled flex flex-col gap-1 items-center p-2 rounded-md"
+    >
+      <div
+        class="w-5 bg-gray1-300 h-[2px] text-gray group-[.disabled]:rotate-45 group-[.disabled]:-translate-y-[1px] transition-all origin-left duration-100"
+      ></div>
+      <div
+        class="w-5 h-[2px]"
+      ></div>
+      <div
+        class="w-5 bg-gray1-300 h-[2px] text-gray group-[.disabled]:-rotate-45 group-[.disabled]:translate-y-[1px] transition-all origin-left duration-100"
+      ></div>
+    </button>
+  </div>
 </div>

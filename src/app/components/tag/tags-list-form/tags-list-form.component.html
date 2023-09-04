@@ -6,11 +6,11 @@
       <div class="flex w-full p-3 items-center gap-2">
         <div
           class="w-6 h-6 min-h-6 min-w-[24px] rounded"
-          [ngClass]="fromTag ? selectedColors() + '/50' : selectedColors()"
+          [ngClass]="true ? selectedColors() + '/50' : selectedColors()"
         ></div>
         <input
           type="text"
-          [placeholder]="fromTag ? 'Tag Name' : 'List Name'"
+          [placeholder]="true ? 'Tag Name' : 'List Name'"
           class="h-8 rounded w-40 bg-white/70 border outline-none appearance-none pl-2"
           formControlName="formName"
           required
@@ -40,7 +40,7 @@
                   listColors.PURPLE
                 ]
               },
-              forTag: fromTag
+              forTag: true
             }
           "
         ></ng-container>
@@ -55,7 +55,7 @@
       type="button"
       class="w-5 h-5 rounded-sm"
       (click)="changeColor(item)"
-      [ngClass]="forTag ? item + '/50' : item"
+      [ngClass]="true ? item + '/50' : item"
     ></button>
   </ng-container>
   <span

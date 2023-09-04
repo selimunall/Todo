@@ -1,12 +1,12 @@
 <div
-  [ngClass]="{ '!left-0': isMenuOpen() }"
-  class="font-['REM'] bg-gray1-100 w-[300px] h-screen absolute left-[-246px] transition-all duration-500 pl-5 pr-2"
+  [ngClass]="{ '!left-0': state.isMenuOpen() }"
+  class="bg-gray1-100 w-[300px] h-screen absolute left-[-246px] transition-all duration-500 pl-5 pr-2"
 >
   <div class="flex justify-between items-end py-4">
     <h1 class="text-3xl font-bold leading-7 text-gray1-400">Menu</h1>
     <button
-      [ngClass]="{ disabled: isMenuOpen() }"
-      (click)="toggleMenu()"
+      [ngClass]="{ disabled: state.isMenuOpen() }"
+      (click)="state.toggleMenuMenu()"
       class="group flex flex-col gap-1 items-center p-2 rounded-md"
     >
       <div
@@ -23,18 +23,18 @@
 
   <!-- Search  -->
   <div
-    [ngClass]="{ 'border-gray1-100': !isMenuOpen() }"
+    [ngClass]="{ 'border-gray1-100': !state.isMenuOpen() }"
     class="relative border rounded-md transition-all duration-500 mr-[10px]"
   >
     <input
-      [ngClass]="{ hidden: !isMenuOpen() }"
+      [ngClass]="{ hidden: !state.isMenuOpen() }"
       placeholder="Search"
       type="text"
       class="w-full bg-gray1-100 p-2 pl-10 rounded-md outline-none appearance-none"
     />
-    <div [ngClass]="{ hidden: isMenuOpen() }" class="h-10 w-full"></div>
+    <div [ngClass]="{ hidden: state.isMenuOpen() }" class="h-10 w-full"></div>
     <img
-      [ngClass]="{ '!-right-2': !isMenuOpen() }"
+      [ngClass]="{ '!-right-2': !state.isMenuOpen() }"
       src="../../../assets/icons/search.svg"
       class="transition-all duration-500 absolute w-6 top-2 right-56 text-white focus:border-none fill-white"
     />
@@ -94,7 +94,7 @@
   </ng-container>
 
   <button
-    (click)="toggleDropDown($event)"
+    (click)="openListTags()"
     class="py-4 px-3 flex hover:bg-white rounded-md w-full transition-all duration-100"
   >
     <img src="../../../assets/icons/plus.svg" class="w-6" />
@@ -106,7 +106,7 @@
   <!-- Lists End -->
 
   <div
-    [ngClass]="{ '!-mt-0': isDropDownOpen() }"
+    [ngClass]="{ '!-mt-0': tagState.listTagsMenuOpen() }"
     class="transition-all bg-gray1-100 absolute -mt-[106px] w-full -ml-5 pl-4 z-10 pr-12 duration-200"
   >
     <!-- Tags  -->
@@ -120,7 +120,12 @@
           settings;
           context: {
             items: [
-              { name: 'Settings', icon: 'settings.svg', login: true },
+              {
+                name: 'Settings',
+                icon: 'settings.svg',
+                login: true,
+                function: state.toggleSettingsMenu
+              },
               { name: 'Sing Out', icon: 'logout.svg', login: true },
               { name: 'Login In', icon: 'login.svg', login: false }
             ]
@@ -130,6 +135,12 @@
       </ng-container>
     </div>
     <!-- Setting End -->
+  </div>
+  <div
+    [ngClass]="{ '!left-0': state.isSettingsOpen() }"
+    class="bg-gray1-100 top-0 z-10 w-[300px] h-screen absolute left-[-300px] transition-all duration-500 "
+  >
+    <slm-settings></slm-settings>
   </div>
 </div>
 
@@ -148,7 +159,7 @@
       [color]="item.color"
       [counter]="item.counter"
       [counterValue]="item.counterValue"
-      [isMenuOpen]="isMenuOpen()"
+      [isMenuOpen]="state.isMenuOpen()"
     ></list-components>
   </ng-container>
 </ng-template>
@@ -157,6 +168,7 @@
   <ng-container *ngFor="let item of items">
     <ng-container *ngIf="item.login">
       <button
+        (click)="item.function()"
         class="flex items-center hover:bg-white rounded-md py-4 px-4 transition-all"
       >
         <img src="../../../assets/icons/{{ item.icon }}" class="w-6" />

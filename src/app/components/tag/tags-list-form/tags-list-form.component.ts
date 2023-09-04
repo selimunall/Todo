@@ -1,5 +1,5 @@
 import { NgClass, NgFor, NgTemplateOutlet } from '@angular/common';
-import { Component, HostListener, Input, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, Output, inject, signal } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -7,22 +7,38 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { ListColors } from 'src/app/model/colorType.model';
-import { ListService } from 'src/app/state/lists.service';
-import { TodoService } from 'src/app/state/todo.service';
+import { ListService } from 'src/app/services/lists.service';
+import { TodoService } from 'src/app/services/todo.service';
+import { TagState } from '../tag.state';
 
 @Component({
   standalone: true,
   selector: 'tags-list-form',
+  changeDetection : ChangeDetectionStrategy.OnPush,
   templateUrl: './tags-list-form.component.html',
   imports: [FormsModule, NgClass, ReactiveFormsModule, NgTemplateOutlet, NgFor],
+  providers: [TagState]
 })
 export class TagsListFormComponent {
-  @Input() public fromTag: Boolean = false;
+  @Input() fromTag: boolean = false;
   public listService = inject(ListService);
   public todoService = inject(TodoService);
+  public state = inject(TagState);
   public lists = this.listService.lists;
   public listColors = ListColors;
+  private readonly _eRef = inject(ElementRef);
   public selectedColors = signal<ListColors>(ListColors.RED);
+
+  @HostListener('document:click',['$event'])
+  public outClick($event : MouseEvent){
+    if(this.fromTag && this._eRef.nativeElement.contains($event.target) && this.state.tagTagsMenuOpen()){
+      console.log('a')
+    } else if(!this.fromTag && this._eRef.nativeElement.contains($event.target) && this.state.listTagsMenuOpen()){
+      console.log('b');
+    }
+  }
+
+
 
   public listForm = new FormGroup({
     formName: new FormControl(''),
@@ -33,7 +49,7 @@ export class TagsListFormComponent {
   }
 
   public createList() {
-    if (!this.fromTag) {
+    if (!this.state.fromTag) {
       this.listService.addNewList(
         this.listForm.value.formName!,
         this.selectedColors()
