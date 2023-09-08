@@ -10,28 +10,30 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { TagsListFormComponent } from 'src/app/components/tag/tags-list-form/tags-list-form.component';
+// import { TagsListFormComponent } from 'src/app/components/tag/tags-list-form/tags-list-form.component';
 import { TagState } from 'src/app/components/tag/tag.state';
 import { ConditionState} from 'src/app/state/condition.state';
 import { SettingsComponent } from '../settings/settings.component';
+import { RouterLink } from '@angular/router';
+import { TagsListFormComponent } from "../../components/tag/tags-list-form/tags-list-form.component";
 @Component({
-  standalone: true,
-  selector: 'app-menu',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './menu.component.html',
-  imports: [
-    NgClass,
-    NgFor,
-    NgTemplateOutlet,
-    NgIf,
-    TagsComponent,
-    ListComponentsComponent,
-    FormsModule,
-    ReactiveFormsModule,
-    TagsListFormComponent,
-    SettingsComponent,
-  ],
-  providers: [TagState]
+    standalone: true,
+    selector: 'app-menu',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './menu.component.html',
+    imports: [
+        NgClass,
+        NgFor,
+        NgTemplateOutlet,
+        NgIf,
+        TagsComponent,
+        ListComponentsComponent,
+        FormsModule,
+        ReactiveFormsModule,
+        SettingsComponent,
+        RouterLink,
+        TagsListFormComponent
+    ]
 })
 export class MenuComponent  {
   public state = inject(ConditionState);
@@ -61,4 +63,6 @@ export class MenuComponent  {
   public openListTags() {
     this.tagState.openListTag(!this.tagState.listTagsMenuOpen());
   }
+
+
 }

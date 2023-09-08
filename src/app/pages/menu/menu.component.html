@@ -1,6 +1,6 @@
 <div
   [ngClass]="{ '!left-0': state.isMenuOpen() }"
-  class="bg-gray1-100 w-[300px] h-screen absolute left-[-246px] transition-all duration-500 pl-5 pr-2"
+  class="bg-gray1-100 w-[300px] h-screen fixed left-[-246px] transition-all duration-500 pl-5 pr-2"
 >
   <div class="flex justify-between items-end py-4">
     <h1 class="text-3xl font-bold leading-7 text-gray1-400">Menu</h1>
@@ -53,21 +53,25 @@
             name: 'Upcoming',
             icon: 'upcoming.svg',
             counter : true,
-            counterValue: 11
+            counterValue: 11,
+            link: '/upcoming'
           },
           {
             name: 'Today',
             icon: 'daily.svg',
             counter : true,
-            counterValue: 2
+            counterValue: 2,
+            link: '/today'
           },
           {
             name: 'Calender',
             icon: 'calender.svg',
+            link: '/calender'
           },
           {
             name: 'Sticky Wall',
             icon: 'note.svg',
+            link: '/sticky-wall'
           },
         ],
         addItem: false
@@ -110,7 +114,7 @@
     class="transition-all bg-gray1-100 absolute -mt-[106px] w-full -ml-5 pl-4 z-10 pr-12 duration-200"
   >
     <!-- Tags  -->
-    <tags></tags>
+    <slm-tags></slm-tags>
     <!-- Tags End -->
 
     <!-- Settings -->
@@ -138,7 +142,7 @@
   </div>
   <div
     [ngClass]="{ '!left-0': state.isSettingsOpen() }"
-    class="bg-gray1-100 top-0 z-10 w-[300px] h-screen absolute left-[-300px] transition-all duration-500 "
+    class="bg-gray1-100 top-0 z-10 w-[300px] h-full  fixed left-[-300px] transition-all duration-500 "
   >
     <slm-settings></slm-settings>
   </div>
@@ -154,6 +158,8 @@
   <h1 class="font-medium text-sm text-gray1-400 pl-2 mt-8">{{ title }}</h1>
   <ng-container *ngFor="let item of items">
     <list-components
+      (click)="$event.preventDefault()"
+      [routerLink]="item.link" 
       [name]="item.name"
       [icon]="item.icon"
       [color]="item.color"

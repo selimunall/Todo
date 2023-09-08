@@ -9,8 +9,7 @@ export class ConditionState {
     this.isMenuOpen.set(!this.isMenuOpen());
   };
 
-  public toggleSettingsMenu = (condition: boolean) => {
-    this.isSettingsOpen.update((v) => !v);
-    console.log('state', this.isSettingsOpen());
+  public toggleSettingsMenu = () => {
+    this.isSettingsOpen.set(!this.isSettingsOpen());
   };
 }

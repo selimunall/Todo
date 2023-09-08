@@ -17,7 +17,6 @@ import { TagState } from '../tag.state';
   changeDetection : ChangeDetectionStrategy.OnPush,
   templateUrl: './tags-list-form.component.html',
   imports: [FormsModule, NgClass, ReactiveFormsModule, NgTemplateOutlet, NgFor],
-  providers: [TagState]
 })
 export class TagsListFormComponent {
   @Input() fromTag: boolean = false;
@@ -31,9 +30,9 @@ export class TagsListFormComponent {
 
   @HostListener('document:click',['$event'])
   public outClick($event : MouseEvent){
-    if(this.fromTag && this._eRef.nativeElement.contains($event.target) && this.state.tagTagsMenuOpen()){
+    if(this.fromTag && !this._eRef.nativeElement.contains($event.target) && this.state.tagTagsMenuOpen()){
       console.log('a')
-    } else if(!this.fromTag && this._eRef.nativeElement.contains($event.target) && this.state.listTagsMenuOpen()){
+    } else if(!this.fromTag && !this._eRef.nativeElement.contains($event.target) && this.state.listTagsMenuOpen()){
       console.log('b');
     }
   }

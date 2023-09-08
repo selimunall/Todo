@@ -20,6 +20,5 @@ export class ListComponentsComponent implements OnInit {
   @Input() public isMenuOpen: Boolean = false;
 
   ngOnInit(): void {
-    console.log(this.color);
   }
 }

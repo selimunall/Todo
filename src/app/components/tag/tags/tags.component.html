@@ -19,9 +19,9 @@
       </button>
       <div
         [ngClass]="!state.tagTagsMenuOpen() ? 'hidden' : 'block'"
-        class="ease-out transition-all duration-300 absolute translate-x-full -ml-6"
+        class="transition-all duration-300 absolute translate-x-full -ml-6" 
       >
-        <tags-list-form [fromTag]="true"></tags-list-form>
+        <tags-list-form [fromTag]="true" ></tags-list-form>
       </div>
     </div>
   </ng-template>

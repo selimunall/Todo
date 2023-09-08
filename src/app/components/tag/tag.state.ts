@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class TagState {
     public isMenuOpen = signal(false);
     public listTagsMenuOpen = signal(false);

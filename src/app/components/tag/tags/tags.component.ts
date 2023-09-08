@@ -1,25 +1,20 @@
-import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgFor, NgTemplateOutlet } from '@angular/common';
 import {
   Component,
-  HostListener,
-  Input,
   inject,
   signal,
   ChangeDetectionStrategy,
   ElementRef,
 } from '@angular/core';
-import { ListComponentsComponent } from '../../list-components/list-components.component';
 import { TodoService } from 'src/app/services/todo.service';
 import { TagsListFormComponent } from '../tags-list-form/tags-list-form.component';
 import { TagState } from '../tag.state';
-
 @Component({
   standalone: true,
-  selector: 'tags',
+  selector: 'slm-tags',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './tags.component.html',
   imports: [NgTemplateOutlet, NgFor, NgClass, TagsListFormComponent],
-  providers: [TagState],
 })
 export class TagsComponent {
   public state = inject(TagState);

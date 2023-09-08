@@ -1,4 +1,6 @@
 <div class="font-['REM']">
     <app-menu></app-menu>
-    <router-outlet></router-outlet>
+    <div [ngClass]="{'w-[calc(100vw-56px) ml-[56px]': !state.isMenuOpen()}" class="w-[calc(100vw-300px)] transition-all duration-500 ml-[300px] flex">
+        <router-outlet></router-outlet>
+    </div>
 </div>
