@@ -2,7 +2,7 @@ import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class ConditionState {
-  public isMenuOpen: WritableSignal<boolean> = signal<boolean>(true);
+  public isMenuOpen: WritableSignal<boolean> = signal<boolean>(false);
   public isSettingsOpen: WritableSignal<boolean> = signal<boolean>(false);
 
   public toggleMenuMenu = () => {

@@ -1,6 +1,6 @@
 <div class="font-['REM']">
     <app-menu></app-menu>
-    <div [ngClass]="{'w-[calc(100vw-56px) ml-[56px]': !state.isMenuOpen()}" class="w-[calc(100vw-300px)] transition-all duration-500 ml-[300px] flex">
+    <div [ngClass]="{'!w-[calc(100vw-318px)] !ml-[300px] ': state.isMenuOpen()}" class=" transition-all duration-500 w-[calc(100vw-73px)] ml-[56px] flex">
         <router-outlet></router-outlet>
     </div>
 </div>
