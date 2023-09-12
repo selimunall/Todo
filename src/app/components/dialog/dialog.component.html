@@ -1,0 +1,17 @@
+
+<div
+  *ngIf="!hidden"
+  class="flex flex-col px-8 py-6 rounded-2xl"
+  @zoomIn
+  @zoomOut
+>
+  <div class="flex flex-row justify-between">
+    <div class="flex items-end">
+      <span class="text-2xl font-medium leading-6">{{ dialogTitle }}</span>
+    </div>
+    <button (click)="close()">
+      <span class="material-symbols-outlined"> close </span>
+    </button>
+  </div>
+  <ng-container *ngComponentOutlet="dialogComponent"></ng-container>
+</div>

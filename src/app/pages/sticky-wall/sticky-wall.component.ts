@@ -1,5 +1,7 @@
 import { NgClass, NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { AddStickyComponent } from 'src/app/components/add-sticky-popup/add-sticky-popup.component';
+import { DialogService } from 'src/app/components/dialog/dialog.service';
 import { ConditionState } from 'src/app/state/condition.state';
 
 @Component({
@@ -7,10 +9,11 @@ import { ConditionState } from 'src/app/state/condition.state';
     selector: 'sticky-wall',
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: 'sticky-wall.component.html',
-    imports: [NgFor, NgClass]
+    imports: [NgFor, NgClass],
 })
 
 export class StickyWallComponent {
+    public dialogService = inject(DialogService)
     public state = inject(ConditionState);
     public stickyData = [
         {
@@ -30,4 +33,8 @@ export class StickyWallComponent {
             content: 'Notes from the workshop: - Sizing matters - Choose distinctive imagery - The landing page must match the display ad'
         }
     ]
+
+    public dialogOpen() {
+        this.dialogService.open(AddStickyComponent,'Add new stikcy')
+    }
 }

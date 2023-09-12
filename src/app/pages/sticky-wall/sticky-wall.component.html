@@ -12,6 +12,7 @@
       </a>
     </ng-container>
     <div
+      (click)="dialogOpen()"
       [ngClass]="{ '!min-w-[calc((100vw-260px)/4)]': !state.isMenuOpen() }"
       class="hover:scale-110 flex items-center justify-center transition-all duration-500 min-w-[calc((100vw-504px)/4)] max-w-[380px] p-5 min-h-[380px] border rounded-md bg-yellow-200"
     >

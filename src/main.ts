@@ -8,6 +8,10 @@ import { TodayComponent } from './app/pages/today/today.component';
 import { CalenderComponent } from './app/pages/calender/calender.component';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { UpcomingComponent } from './app/pages/upcoming/upcoming.componet';
+import { DialogService } from './app/components/dialog/dialog.service';
+import { DialogModule } from '@angular/cdk/dialog';
+import { DialogComponent } from './app/components/dialog/dialog.component';
+import { importProvidersFrom } from '@angular/core';
 
 const routes: Routes = [
   {
@@ -19,7 +23,8 @@ const routes: Routes = [
     children: [
       {
         path: 'sticky-wall',
-        component:  StickyWallComponent
+        component:  StickyWallComponent,
+        providers: [importProvidersFrom(DialogModule), DialogService]
       },
       {
         path: 'today',
@@ -42,6 +47,7 @@ const routes: Routes = [
 
 bootstrapApplication(AppComponent,{
   providers:[
+    provideAnimations(),
     provideRouter(routes)
   ]
 });
