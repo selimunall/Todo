@@ -1,0 +1,23 @@
+<div class="p-8 w-full flex flex-col">
+    <h1 class="text-6xl mb-8 font-semibold">Sticky Wall</h1>
+    <!-- stickys -->
+    <div class="border rounded-lg p-6 flex w-full gap-6 flex-wrap">
+      <ng-container *ngFor="let item of stickyData">
+        <a
+          [ngClass]="{ '!w-[calc((100vw-260px)/4)]': !state.isMenuOpen() }"
+          class="hover:scale-110 p-5 min-h-[380px] duration-500 w-[calc((100vw-504px)/4)] transition-all border rounded-lg bg-yellow-200"
+        >
+          <h1 class="text-2xl font-medium">{{ item.title }}</h1>
+          <p class="mt-2 text-lg text-black/70">{{ item.content }}</p>
+        </a>
+      </ng-container>
+      <div
+        (click)="dialogOpen()"
+        [ngClass]="{ '!min-w-[calc((100vw-260px)/4)]': !state.isMenuOpen() }"
+        class="hover:scale-110 flex items-center justify-center transition-all duration-500 min-w-[calc((100vw-504px)/4)] max-w-[380px] p-5 min-h-[380px] border rounded-md bg-yellow-200"
+      >
+        <img src="./../../../assets/icons/plus.svg" class="w-14" />
+      </div>
+    </div>
+  </div>
+  

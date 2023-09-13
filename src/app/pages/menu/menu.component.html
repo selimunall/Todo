@@ -1,36 +1,36 @@
 <div
   [ngClass]="{ '!left-0': state.isMenuOpen() }"
-  class="bg-gray1-100 w-[300px] h-screen fixed left-[-246px] transition-all duration-500 pl-5 pr-2"
+  class="bg-todo_primary-0 w-[300px] h-screen fixed left-[-246px] transition-all duration-500 pl-5 pr-2"
 >
   <div class="flex justify-between items-end py-4 mt-3">
-    <h1 class="text-3xl font-bold leading-7 text-gray1-400">Menu</h1>
+    <h1 class="text-3xl font-bold leading-7 text-todo_primary-900">Menu</h1>
     <button
       [ngClass]="{ disabled: state.isMenuOpen() }"
       (click)="state.toggleMenuMenu()"
       class="group flex flex-col gap-1 items-center p-2 rounded-md"
     >
       <div
-        class="w-5 bg-gray1-300 h-[2px] text-gray group-[.disabled]:rotate-45 group-[.disabled]:-translate-y-[1px] transition-all origin-left duration-100"
+        class="w-5 bg-todo_primary-600 h-[2px] text-gray group-[.disabled]:rotate-45 group-[.disabled]:-translate-y-[1px] transition-all origin-left duration-100"
       ></div>
       <div
-        class="w-5 bg-gray1-300 h-[2px] text-gray group-[.disabled]:bg-gray1-100"
+        class="w-5 bg-todo_primary-600 h-[2px] text-gray group-[.disabled]:bg-todo_primary-0"
       ></div>
       <div
-        class="w-5 bg-gray1-300 h-[2px] text-gray group-[.disabled]:-rotate-45 group-[.disabled]:translate-y-[1px] transition-all origin-left duration-100"
+        class="w-5 bg-todo_primary-600 h-[2px] text-gray group-[.disabled]:-rotate-45 group-[.disabled]:translate-y-[1px] transition-all origin-left duration-100"
       ></div>
     </button>
   </div>
 
   <!-- Search  -->
   <div
-    [ngClass]="{ 'border-gray1-100': !state.isMenuOpen() }"
+    [ngClass]="{ 'border-todo-bg-todo_primary-0': !state.isMenuOpen() }"
     class="relative border rounded-md transition-all duration-500 mr-[10px]"
   >
     <input
       [ngClass]="{ hidden: !state.isMenuOpen() }"
       placeholder="Search"
       type="text"
-      class="w-full bg-gray1-100 p-2 pl-10 rounded-md outline-none appearance-none"
+      class="w-full bg-todo_primary-0 p-2 pl-10 rounded-md outline-none appearance-none"
     />
     <div [ngClass]="{ hidden: state.isMenuOpen() }" class="h-10 w-full"></div>
     <img
@@ -111,7 +111,7 @@
 
   <div
     [ngClass]="{ '!-mt-0': tagState.listTagsMenuOpen() }"
-    class="transition-all bg-gray1-100 absolute -mt-[106px] w-full -ml-5 pl-4 z-10 pr-12 duration-200"
+    class="transition-all bg-todo_primary-0 absolute -mt-[106px] w-full -ml-5 pl-4 z-10 pr-12 duration-200"
   >
     <!-- Tags  -->
     <slm-tags></slm-tags>
@@ -142,7 +142,7 @@
   </div>
   <div
     [ngClass]="{ '!left-0': state.isSettingsOpen() }"
-    class="bg-gray1-100 top-0 z-10 w-[300px] h-full  fixed left-[-300px] transition-all duration-500 "
+    class="bg-todo_primary-0 top-0 z-10 w-[300px] h-full  fixed left-[-300px] transition-all duration-500 "
   >
     <slm-settings></slm-settings>
   </div>
@@ -155,7 +155,7 @@
   let-icon="icon"
   let-addItem="addItem"
 >
-  <h1 class="font-medium text-sm text-gray1-400 pl-2 mt-8">{{ title }}</h1>
+  <h1 class="font-medium text-sm text-todo_primary-900 pl-2 mt-8">{{ title }}</h1>
   <ng-container *ngFor="let item of items">
     <list-components
       (click)="$event.preventDefault()"

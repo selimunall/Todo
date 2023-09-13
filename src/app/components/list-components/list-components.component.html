@@ -12,9 +12,9 @@
       <div [ngClass]="[!icon ? color : '']" class="rounded">
         <div
           [ngClass]="{
-            '!right-1 z-10  hover:bg-gray1-400/25 duration-100 rounded-md':
+            '!right-1 z-10  hover:bg-todo_primary-900/25 duration-100 rounded-md':
               !isMenuOpen,
-            'bg-gray1-100': icon
+            'bg-todo_primary-0': icon
           }"
           class="w-6 h-6 fill-white text-white absolute transition-all duration-500 right-[236px]"
         >
@@ -37,7 +37,7 @@
       '!-mr-[1px]': !isMenuOpen && !icon
     }"
     *ngIf="counter"
-    class="text-gray1-400 bg-gray1-200 transition-all duration-500 mr-2 -mt-0 -ml-3 px-3 py-[1px] text-base rounded-md"
+    class="text-primarbg-todo_primary-900 bg-todo_primary-100 transition-all duration-500 mr-2 -mt-0 -ml-3 px-3 py-[1px] text-base rounded-md"
   >
     {{ counterValue }}
   </a>

@@ -5,9 +5,9 @@ import {
   Component,
   inject,
 } from '@angular/core';
-import { AnimationDurationsMilliseconds } from 'src/shared/animations/lib/defaults';
-import { slideInBottom, slideOutBottom } from 'src/shared/animations/lib/slide';
-import { zoomIn, zoomOut } from 'src/shared/animations/lib/zoom';
+import { AnimationDurationsMilliseconds } from 'src/shared/animations/defaults';
+import { slideInBottom, slideOutBottom } from 'src/shared/animations/slide';
+import { zoomIn, zoomOut } from 'src/shared/animations/zoom';
 
 @Component({
   standalone: true,

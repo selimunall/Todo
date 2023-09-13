@@ -2,13 +2,22 @@
 module.exports = {
   content: ["./src/**/*.{html,ts}"],
   theme: {
+    fontFamily: {
+      sans: ['REM']
+    },
     extend: {
       colors: {
-        gray1: {
-          100: "#F4F4F4",
-          200: "#EBEBEB",
-          300: "#7C7C7C",
-          400: "#444444",
+        todo_primary: {
+            0: 'var(--slm-primary)',
+          100: 'var(--slm-primary-100)',
+          200: 'var(--slm-primary-200)',
+          300: 'var(--slm-primary-300)',
+          400: 'var(--slm-primary-400)',
+          500: 'var(--slm-primary-500)',
+          600: 'var(--slm-primary-600)',
+          700: 'var(--slm-primary-700)',
+          800: 'var(--slm-primary-800)',
+          900: 'var(--slm-primary-900)',
         },
         "todo-purple": {
           100: "#FF6B6B",

@@ -1,5 +1,5 @@
-<div class="bg-gray1-100 flex w-full flex-col">
-  <h1 class="font-medium text-sm text-gray1-400 pl-2 mt-8">TAGS</h1>
+<div class="bg-todo_primary-0 flex w-full flex-col">
+  <h1 class="font-medium text-sm text-todo_primary-900 pl-2 mt-8">TAGS</h1>
   <div class="w-full flex flex-wrap">
     <ng-container
       *ngTemplateOutlet="tagsTemplate; context: { tags: todoService.tags }"
@@ -18,9 +18,8 @@
         <span class="ml-1">Add Tag</span>
       </button>
       <div
-        [ngClass]="!state.tagTagsMenuOpen() ? 'hidden' : 'block'"
-        class="transition-all duration-300 absolute translate-x-full -ml-6" 
-      >
+        [hidden]="!state.tagTagsMenuOpen()"
+        class="transition-all duration-300 absolute translate-x-full -ml-6">
         <tags-list-form [fromTag]="true" ></tags-list-form>
       </div>
     </div>
